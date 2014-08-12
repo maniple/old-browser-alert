@@ -1,0 +1,87 @@
+body {
+    overflow: hidden;
+    position: relative;
+}
+#old-browser-alert .overlay {
+    z-index: 1000000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url({{ baseUrl('assets/old-browser-alert/img/overlay.gif') }});
+}
+#old-browser-alert .dialog {
+    z-index: 1000001;
+    width: 520px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -260px;
+    background: #fff;
+    padding: 20px;
+    font-size: 13px;
+    line-height: 18px;
+    border: 1px solid #444;
+}
+#old-browser-alert h1 {
+    font-size: 26px;
+    margin-top: 0;
+}
+#old-browser-alert p {
+    margin: 10px 0;
+}
+#old-browser-alert table {
+    border: none;
+    margin: 16px 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+#old-browser-alert td {
+    border: none;
+    padding: 0;
+    text-align: center;
+    color: #888;
+    width: 25%;
+}
+#old-browser-alert table a {
+    display: block;
+    border: none;
+    text-decoration: none;
+    padding: 4px 4px 2px;
+    border-bottom: none;
+    color: #5083bc;
+}
+#old-browser-alert table a img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+}
+#old-browser-alert table a span {
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    width: 100px; /* IE 5.5 */
+}
+#old-browser-alert table a:hover {
+    background-color: #5083bc;
+    color: #fff;
+}
+#old-browser-alert a.button {
+    margin: 20px 0 0;
+    padding: 8px 0;
+    display: block;
+    width: 100%;
+    border: none;
+    color: #fff;
+    background: #5083bc;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+}
+#old-browser-alert a.button:hover {
+    background-color: #38679e;
+}

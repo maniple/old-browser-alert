@@ -1,0 +1,46 @@
+<div id="old-browser-alert">
+    <div class="overlay"></div>
+    <div class="dialog">
+        <h1>{{ translate('You are using a browser from the past!') | raw }}</h1>
+        <p>{{ translate('Our website is designed to work with <strong>modern web browsers</strong>. Using your current browser will prevent you from accessing many features on our website.') | raw }}</p>
+        <p>{{ translate('Use the links below to download a new browser or upgrade your existing browser.') | raw }}</p>
+        <table border="0" cellpadding="0" cellspacing="0" align="center">
+            <tr>
+                <td valign="top">
+                    <a href="http://www.google.com/chrome/">
+                        <img src="{{ baseUrl('assets/old-browser-alert/img/chrome.gif') }}" alt="" />
+                        <span>Chrome</span>
+                    </a>
+                </td>
+                <td valign="top">
+                    <a href="http://www.mozilla.com/firefox/">
+                        <img src="{{ baseUrl('assets/old-browser-alert/img/firefox.gif') }}" alt="" />
+                        <span>Firefox</span>
+                    </a>
+                </td>
+                <td valign="top">
+                    <a href="http://www.microsoft.com/windows/internet-explorer/">
+                        <img src="{{ baseUrl('assets/old-browser-alert/img/ie.gif') }}" alt="" />
+                        <span>Internet Explorer</span>
+                    </a>
+                </td>
+                <td valign="top">
+                    <a href="http://www.opera.com/">
+                        <img src="{{ baseUrl('assets/old-browser-alert/img/opera.gif') }}" alt="" />
+                        <span>Opera</span>
+                    </a>
+                </td>
+{# Safari download site is not accessible with older browsers, tough.
+                <td valign="top">
+                    <a href="http://support.apple.com/downloads/#safari">
+                        <img src="{{ baseUrl('assets/old-browser-alert/img/safari.gif') }}" alt="" />
+                        <span>Safari</span>
+                    </a>
+                </td>
+#}
+            </tr>
+        </table>
+        <p>{{ translate('By closing this window you acknowledge that your experience on our website may be degraded.') | raw }}</p>
+        <a class="button" href="#" onclick="var d=document,e=d.getElementById('old-browser-alert'),s=d.body.style;d.cookie='{{ oldBrowserAlert().getCookieName() }}=1';s.overflow=navigator.userAgent.match(/MSIE 5/i)?'auto':'visible';s.position='';e.parentNode.removeChild(e);return false;">{{ translate('Show me the page anyway') | raw }}</a>
+    </div>
+</div>
