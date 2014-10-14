@@ -16,9 +16,10 @@ In view scripts (typically in layouts) before HEAD tag insert:
 
 	{% do oldBrowserAlert().appendStyle() %}
 
-and at the beginning of the BODY tag insert: 
+Make sure headStyle() helper is rendered in the layout's HEAD tag.
+At the beginning of the BODY tag insert: 
 
-	{% oldBrowserAlert() %}
+	{{ oldBrowserAlert() }}
 
-Whenever an old browser is detected alert is rendered in the view script, otherwise nothing happens. 
+Whenever an old browser is detected the alert is rendered in the view script, otherwise nothing happens.
 
