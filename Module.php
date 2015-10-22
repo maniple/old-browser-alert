@@ -2,16 +2,19 @@
 
 namespace OldBrowserAlert;
 
-use Zend\Mvc\MvcEvent;
-
 class Module
 {
-    public function onBootstrap(MvcEvent $e)
+    public function getConfig()
     {
-        $sm = $e->getApplication()->getServiceManager();
-
-        /** @var $view \Zend_View_Abstract */
-        $view = $sm->get('View');
-        $view->addHelperPath(__DIR__ . '/module/views/helpers', 'OldBrowserAlert_View_Helper_');
+        return array(
+            'view' => array(
+                'helperPath' => array(
+                    'OldBrowserAlert_View_Helper_' => __DIR__ . '/module/views/helpers/',
+                ),
+                'scriptPath' => array(
+                    __DIR__ . '/module/views/scripts',
+                ),
+            ),
+        );
     }
 }
