@@ -2,7 +2,6 @@
 
 class OldBrowserAlert_View_Helper_OldBrowserAlert
     extends Zend_View_Helper_Abstract
-    implements Zefram_Twig_SafeInterface
 {
     /**
      * @var bool
@@ -12,35 +11,35 @@ class OldBrowserAlert_View_Helper_OldBrowserAlert
     /**
      * @return OldBrowserAlert_View_Helper_OldBrowserAlert
      */
-    public function oldBrowserAlert() // {{{
+    public function oldBrowserAlert()
     {
         return $this;
-    } // }}}
+    }
 
     /**
      * @return string
      */
-    public function toString() // {{{
+    public function toString()
     {
         if ($this->needShowAlert()) {
             // append stylesheet
             return $this->view->renderScript('alert.html.twig', 'old-browser-alert');
         }
         return '';
-    } // }}}
+    }
 
     /**
      * Append stylesheet to headStyle view helper.
      *
      * @return void
      */
-    public function appendStyle() // {{{
+    public function appendStyle()
     {
         if ($this->needShowAlert()) {
             $style = $this->view->renderScript('style.css.twig', 'old-browser-alert');
             $this->view->headStyle()->appendStyle($style);
         }
-    } // }}}
+    }
 
     /**
      * @return bool
@@ -74,37 +73,38 @@ class OldBrowserAlert_View_Helper_OldBrowserAlert
     /**
      * @return bool
      */
-    public function needShowAlert() // {{{
+    public function needShowAlert()
     {
         $front = Zend_Controller_Front::getInstance();
         return $this->isOldBrowser() && !$front->getRequest()->getCookie($this->getCookieName());
-    } // }}}
+    }
 
     /**
      * @return string
      */
-    public function getCookieName() // {{{
+    public function getCookieName()
     {
         return 'old-browser-alert';
-    } // }}}
+    }
 
     /**
+     * @see Zefram_Twig_SafeInterface
      * @return array
      */
-    public function getSafe() // {{{
+    public function getSafe()
     {
         return array('html');
-    } // }}}
+    }
 
     /**
      * @return string
      */
-    public function __toString() // {{{
+    public function __toString()
     {
         try {
             return $this->toString();
         } catch (Exception $e) {
             return $e->getMessage();
         }
-    } // }}}
+    }
 }

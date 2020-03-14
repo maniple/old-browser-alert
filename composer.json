@@ -9,6 +9,6 @@
         }
     ],
     "require": {
-        "xemlock/zend1-composer-installer": "*"
+        "xemlock/zend1-composer-installer": "^0.1.0"
     }
 }

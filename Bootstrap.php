@@ -1,27 +1,56 @@
 <?php
 
-class OldBrowserAlert_Bootstrap extends Maniple_Application_Module_Bootstrap
+class OldBrowserAlert_Bootstrap extends Zend_Application_Module_Bootstrap
 {
-    public function getModuleDependencies()
+    /**
+     * @throws Zend_Application_Bootstrap_Exception
+     * @throws Zend_Translate_Exception
+     */
+    protected function _initTranslations()
     {
-        return array();
+        $bootstrap = $this->getApplication();
+        if (!$bootstrap instanceof Zend_Application_Bootstrap_BootstrapAbstract) {
+            return;
+        }
+        if (!$bootstrap->hasPluginResource('Translate') && !is_callable($bootstrap, '_initTranslate')) {
+            return;
+        }
+
+        /** @var Zend_Translate_Adapter $translate */
+        $translate = $bootstrap->bootstrap('Translate')->getResource('Translate')->getAdapter();
+
+        $localeDirectory = dirname(__FILE__) . '/languages/' . $translate->getLocale();
+        if (is_dir($localeDirectory)) {
+            $options = array(
+                'locale'  => $translate->getLocale(),
+                'content' => $localeDirectory,
+                'scan'    => Zend_Translate::LOCALE_DIRECTORY,
+            );
+            if (($cache = $translate->getCache()) !== null) {
+                $options['cache'] = $cache;
+            }
+
+            $translate->addTranslation(new Zend_Translate_Adapter_Array($options));
+        }
     }
 
-    public function getTranslationsConfig()
+    /**
+     * @throws Zend_Application_Bootstrap_Exception
+     */
+    protected function _initView()
     {
-        return array(
-            'scan'    => Zend_Translate::LOCALE_DIRECTORY,
-            'content' => dirname(__FILE__) . '/languages',
-        );
-    }
+        $bootstrap = $this->getApplication();
+        if (!$bootstrap instanceof Zend_Application_Bootstrap_BootstrapAbstract) {
+            return;
+        }
+        if (!$bootstrap->hasPluginResource('View') && !is_callable($bootstrap, '_initView')) {
+            return;
+        }
 
-    public function getViewConfig()
-    {
-        return array(
-            'scriptPaths' => dirname(__FILE__) . '/views/scripts',
-            'helperPaths' => array(
-                'OldBrowserAlert_View_Helper_' => dirname(__FILE__) . '/library/View/Helper/',
-            ),
-        );
+        /** @var Zend_View $view */
+        $view = $bootstrap->bootstrap('View')->getResource('View');
+
+        $view->addScriptPath(dirname(__FILE__) . '/views/scripts');
+        $view->addHelperPath(dirname(__FILE__) . '/views/helpers', 'OldBrowserAlert_View_Helper_');
     }
 }
